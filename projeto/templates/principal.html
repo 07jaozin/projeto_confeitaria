@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!--=============== FAVICON ===============-->
+      <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+      <!--=============== REMIXICONS ===============-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.7.0/remixicon.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+
+      <!--=============== CSS ===============-->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/principal.css')}}">
+
+      <title>Responsive bakery website - Bedimcode</title>
+   </head>
+   <body>
+      <!--==================== HEADER ====================-->
+      <header class="header" id="header">
+            <nav class="nav container">
+               <a href="#" class="nav__logo">Bolos</a>
+
+               <div class="nav__menu" id="nav-menu">
+                  <ul class="nav__list">
+                     <li class="nav__item">
+                        <a href="#home" class="nav__link">Home</a>
+                     </li>
+                     <li class="nav__item">
+                        <a href="#categorias" class="nav__link">Categorias</a>
+                     </li>
+                     <li class="nav__item">
+                        <a href="#itens" class="nav__link">Itens</a>
+                     </li>
+                     <li class="nav__item">
+                        <a href="#sobre__nos" class="nav__link">Sobre Nós</a>
+                     </li>
+                     <li class="nav__item">
+                        <a href="/carrinho" class="nav__link"> <i class="ri-shopping-cart-line"></i></a>
+                     </li>
+                     
+                    
+                  </ul>
+                  <div class="nav__close" id="nav-close">
+                     <i class="ri-close-line"></i>
+                  </div>
+
+                  <img src="{{ url_for('static', filename='imagens/bread-4.png') }}" alt="" class="nav__img-1">
+                  <img src="{{ url_for('static', filename='imagens/bread-1.png') }}a" alt="" class="nav__img-2">
+               </div>
+
+               <div class="nav__toggle" id="nav-toggle">
+                  <a href="carrinho.html" class="ri-shopping-cart-line"></a>
+                  <i class="ri-menu-fill"></i>
+               </div>
+
+
+            </nav>
+      </header>
+
+      <!--==================== MAIN ====================-->
+      <main class="main">
+         <!--==================== HOME ====================-->
+         <section class="home section" id="home">
+            <img src="{{ url_for('static', filename='imagens/home-bg.jpg')}}" alt="" class="home__bg">
+            <div class="home__shadow"></div>
+
+            <div class="home__container container grid">
+               <div class="home__data">
+                  <h1 class="home__title">
+                     Select The Best <br> Quality Breads
+                  </h1>
+                  <a href="#" class="button">Select Breads</a>
+
+                  
+               </div>
+
+               <div class="home__image">
+                  <img src="{{ url_for('static', filename='imagens/bolo5-removebg-preview.png')}}" alt="" class="home__img">
+               </div>
+
+               <footer class="home__footer">
+                  <div class="home__location">
+                     <i class="ri-map-pin-line"></i>
+                     <span>AV. The Sun #321 <br> Lima Peru</span>
+                  </div>
+
+                  <div class="home__social">
+                     <a href="#" target="_blank">
+                        <i class="ri-facebook-circle-line"></i>
+                     </a>
+                     <a href="#" target="_blank">
+                        <i class="ri-instagram-line"></i>
+                     </a>
+                     <a href="#" target="_blank">
+                        <i class="ri-whatsapp-line"></i>
+                     </a>
+                  </div>
+               </footer>
+            </div>
+         </section>
+
+         <!--==================== NEWS ====================-->
+         <section class="new section" id="categorias">
+            <h2 class="section__title">Categorias</h2>
+
+            <div class="new__container container grid">
+               <div class="new__content grid">
+                  <article class="new__card">
+                     <div class="new__data">
+                        <h2 class="new__title">Bolos</h2>
+                        <p class="new__description">Tasty and made with different 
+                           natural grains from the countryside.</p>
+                     </div>
+
+                     <img src="{{ url_for('static', filename='imagens/cone-removebg-preview.png')}}" alt="" class="new__img">
+                  </article>
+                  <article class="new__card">
+                     <div class="new__data">
+                        <h2 class="new__title">Cones</h2>
+                        <p class="new__description">Baked with healthy, gluten-free 
+                           sourdough for good nutrition.</p>
+                     </div>
+
+                     <img src="{{ url_for('static', filename='imagens/bolo4-removebg-preview.png')}}" alt="" class="new__img">
+                  </article>
+                  
+               </div>
+
+               <a href="#" class="new__button button">See new</a>
+            </div>
+         </section>
+         
+         <!--==================== FAVORITES ====================-->
+         <section class="favorite section" id="itens">
+            <div class="heading">
+               <h2 class="section__title">Cones</h2>
+               <div class="swiper-btn">
+   
+                  <div class="swiper-button-prev" id="prev"></div>
+                  <div class="swiper-button-next" id="next"></div>
+                   
+               </div>
+           </div>
+            
+           <div class="ola swiper">
+            <div class=" swiper-wrapper">
+                {% for produtos in produto %}
+                {% if produtos.categoria == 'cone' %}
+                    <article class="favorite__card swiper-slide">
+                       <img src="{{ produtos.foto }}" alt="" class="favorite__img">
+                       <div class="favorite__data">
+                          <h2 class="favorite__title">{{ produtos.sabor }}</h2>
+                          <span class="favorite__subtitle">{{ produtos.categoria }}</span>
+                          <h3 class="favorite__price">R$<span>{{ produtos.preco }}</span></h3>
+                       </div>
+                   
+                       <div class="quant__card">
+                                 <button class="subtract__line"  data-id="{{ produtos.id_produto }}" data-preco="{{ produtos.preco }}">
+                                     <i class="ri-subtract-line"></i>
+                                 </button>
+                                 <span class="quant__item">0</span>
+                                 <button class="add__line"  data-id="{{ produtos.id_produto }}" data-preco="{{ produtos.preco }}">
+
+                                     <i class="ri-add-line"></i>
+                                 </button>
+                             </div>
+                    </article>
+                {% endif %}
+               {% endfor %}
+              
+
+         </section>
+         <section class="favorite section" id="favorite">
+            <div class="heading">
+               <h2 class="section__title">Bolos</h2>
+               <div class="swiper-btn">
+   
+                   <div class="swiper-button-prev" id="prev2"></div>
+                   <div class="swiper-button-next" id="next2"></div>
+                   
+               </div>
+           </div>
+            
+           <div class="ola2 swiper">
+            <div class=" swiper-wrapper">
+                {% for produtos in produto %}
+                {% if produtos.categoria == 'bolos' %}
+                    <article class="favorite__card swiper-slide">
+                       <img src="{{ produtos.foto }}" alt="" class="favorite__img">
+                       <div class="favorite__data">
+                          <h2 class="favorite__title">{{ produtos.sabor }}</h2>
+                          <span class="favorite__subtitle">{{ produtos.categoria }}</span>
+                          <h3 class="favorite__price">R$ <span>{{ produtos.preco }}</span></h3>
+                       </div>
+                   
+                       <div class="quant__card">
+                                 <button class="subtract__line" data-id="{{ produtos.id_produto }}" data-preco="{{ produtos.preco }}">
+                                     <i class="ri-subtract-line"></i>
+                                 </button>
+                                 <span class="quant__item">0</span>
+                                 <button class="add__line"  data-id="{{ produtos.id_produto }}" data-preco="{{ produtos.preco }}">
+
+                                     <i class="ri-add-line"></i>
+                                 </button>
+                             </div>
+                    </article>
+                {% endif %}
+               {% endfor %}
+              
+            </div>
+           </div>
+
+         </section>
+
+        
+
+          <!--==================== ADD ====================-->
+            <div class="add__container ">
+               <h2 class="add__title">Valor: R$<span class="total_pagar">0</span></h2>
+               
+               <button class="add__button button">Adicionar</button>
+            </div>
+         
+         
+      </main>
+
+      <!--==================== FOOTER ====================-->
+      <footer class="footer" id="sobre__nos">
+         <div class="footer__container container grid">
+            <div>
+               <a href="#" class="footer__logo">Agda Bolos</a>
+               <p class="footer__description">
+                  Melhor padaria da sua cidade
+               </p>
+            </div>
+
+            <div class="footer__content grid">
+               <div>
+                  <h3 class="footer__title">Endereço</h3>
+                  <ul class="footer__list">
+                     <li>
+                        <address class="footer__info"> AV. The Sun #321 <br> Lima Peru</address>
+                     </li>
+                     <li>
+                        <address class="footer__info">9AM - 11PM</address>
+                     </li>
+                  </ul>
+               </div>
+
+               <div>
+                  <h3 class="footer__title">Contato</h3>
+                  <ul class="footer__list">
+                     <li>
+                        <address class="footer__info">bakery@email.com</address>
+                     </li>
+                     <li>
+                        <address class="footer__info">(16) 987654-3217</address>
+                     </li>
+                  </ul>
+               </div>
+
+               <div>
+                  <h3 class="footer__title">Nossas redes sociais</h3>
+
+                  <div class="footer__social">
+                     <a href="#" target="_blank">
+                        <i class="ri-facebook-circle-line"></i>
+                     </a>
+                     <a href="#" target="_blank">
+                        <i class="ri-instagram-line"></i>
+                     </a>
+                     <a href="#" target="_blank">
+                        <i class="ri-whatsapp-line"></i>
+                     </a>
+                  </div>
+                 
+               </div>
+            </div>
+
+            <img src="assets/img/bread-4.png" alt="" class="footer__img-1">
+            <img src="assets/img/bread-3.png" alt="" class="footer__img-2">
+         </div>
+
+         
+      </footer>
+
+      <!--========== SCROLL UP ==========-->
+      
+      
+      <!--=============== SCROLLREVEAL ===============-->
+      <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+      <script>
+          var swiper = new Swiper(".ola", {
+      slidesPerView:'auto',
+      spaceBetween: 10,
+      loop: true,
+      freeMode: false,           
+      grabCursor: true,
+      centeredSlides: false,
+      autoplay: {
+        delay: 7500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+         nextEl: "#next",
+         prevEl: "#prev",
+      }
+      
+    });
+      </script>
+      <script>
+          var swiper = new Swiper(".ola2", {
+      slidesPerView:'auto',
+      spaceBetween: 10,
+      loop: true,
+      freeMode: false,           
+      grabCursor: true,
+      centeredSlides: false,
+      autoplay: {
+        delay: 7500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: "#next2",
+        prevEl: "#prev2",
+      }
+      
+    });
+      </script>
+
+      <!--=============== MAIN JS ===============-->
+      <script src="{{ url_for('static', filename='js/principal.js')}}"></script>
+   </body>
+</html>

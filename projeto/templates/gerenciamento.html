@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Produto</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 60px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select,
+        input[type="file"] {
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.2s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus,
+        input[type="file"]:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                margin: 30px 15px;
+                padding: 20px;
+            }
+        }
+        table-container {
+  max-width: 1000px;
+  margin: auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.table-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.menu-table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow-x: auto;
+}
+
+.menu-table thead {
+  background: #4a90e2;
+  color: #fff;
+}
+
+.menu-table th, .menu-table td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.menu-table img {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.edit-btn, .delete-btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.edit-btn {
+  background-color: #28a745;
+}
+
+.edit-btn:hover {
+  background-color: #218838;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  margin-left: 5px;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .menu-table thead {
+    display: none;
+  }
+
+  .menu-table, .menu-table tbody, .menu-table tr, .menu-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .menu-table tr {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ddd;
+  }
+
+  .menu-table td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+  }
+
+  .menu-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 15px;
+    width: 45%;
+    padding-left: 15px;
+    font-weight: bold;
+    text-align: left;
+    color: #333;
+  }
+}
+    </style>
+</head>
+<body>
+
+
+
+
+<div class="container">
+    <h2>Cadastrar Produto</h2>
+    <form action="/gerenciamento" method="POST" enctype="multipart/form-data">
+        <label for="sabor">Sabor</label>
+        <input type="text" id="sabor" name="sabor" placeholder="Ex: Morango com leite condensado" required>
+
+        <label for="categoria">Categoria</label>
+        <select id="categoria" name="categoria" required>
+            <option value="" disabled selected>Selecione a categoria</option>
+            <option value="cone">Cone</option>
+            <option value="bolos">Bolos</option>
+        </select>
+
+        <label for="preco">Preço</label>
+        <input type="text" id="preco" name="preco" placeholder="Ex: 15,00" required>
+
+        <label for="peso">Peso (em gramas)</label>
+        <input type="number" id="peso" name="peso" placeholder="Ex: 300" required>
+
+        <label for="foto">Foto do produto</label>
+        <input type="file" id="foto" name="foto" accept="image/*" required>
+
+        <button type="submit">Cadastrar Produto</button>
+    </form>
+</div>
+<br>
+<br>
+<br>
+<div class="table-container">
+    <h1>🍕 Cardápio</h1>
+    <table class="menu-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Foto</th>
+          <th>Sabor</th>
+          <th>Categoria</th>
+          <th>Preço</th>
+          <th>Peso</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for produtos in produto %}
+        <tr>
+          <td>{{ produtos.id_produto }}</td>
+          <td><img src="{{ produtos.foto }}" alt="Foto Produto"></td>
+          <td>{{ produtos.sabor }}</td>
+          <td>{{ produtos.categoria }}</td>
+          <td>{{ produtos.preco }}</td>
+          <td>{{ produtos.peso }}</td>
+          <td>
+            <a href="/editar_produto/{{ produtos.id_produto }}"  class="edit-btn">Editar</a>
+            <a href="/excluir_produto/{{ produtos.id_produto }}"  class="delete-btn">Excluir</a>
+          </td>
+        </tr>
+        {% endfor %}
+       
+      </tbody>
+    </table>
+  </div>
+<div class="table-container">
+    <h1>Pedido</h1>
+    <table class="menu-table">
+      <thead>
+        <tr>
+          <th>ID do Pedido</th>
+          <th>Nome do Produto</th>
+          <th>Categoria</th>
+          <th>Preço</th>
+          <th>Nome do Usuário</th>
+          <th>Quantidade</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for produtos in pedidoItem %}
+        <tr>
+          <td>{{ produtos.id_pedido }}</td>
+          
+          <td>{{ produtos. nome_produto }}</td>
+          <td>{{ produtos.categoria }}</td>
+          <td>{{ produtos.preco_produto }}</td>
+          <td>{{ produtos.nome_usuario }}</td>
+          <td>{{ produtos.quantidade }}</td>
+        </tr>
+        {% endfor %}
+       
+      </tbody>
+    </table>
+  </div>
+<div class="table-container">
+    <h1>Pedidos</h1>
+    <table class="menu-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Telefone</th>
+          <th>Total a Pagar</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for produtos in pedido %}
+        <tr>
+          <td>{{ produtos.id}}</td>
+          
+          
+          
+          <td>{{ produtos.nome }}</td>
+          <td>{{ produtos.telefone }}</td>
+          <td>{{ produtos.total_pagar }}</td>
+          
+        </tr>
+        {% endfor %}
+       
+      </tbody>
+    </table>
+  </div>
+<script>
+    const precoInput = document.getElementById('preco');
+
+    precoInput.addEventListener('input', function () {
+        // Substitui tudo que não for número ou vírgula
+        this.value = this.value.replace(/[^0-9,]/g, '');
+        
+        // Garante que só exista uma vírgula
+        const parts = this.value.split(',');
+        if (parts.length > 2) {
+            this.value = parts[0] + ',' + parts[1].replace(/,/g, '');
+        }
+    });
+</script>
+
+</body>
+</html>

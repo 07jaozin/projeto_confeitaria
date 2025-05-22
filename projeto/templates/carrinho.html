@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!--=============== FAVICON ===============-->
+      <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+      <!--=============== REMIXICONS ===============-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.7.0/remixicon.css">
+
+      <!--=============== CSS ===============-->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/principal.css')}}">
+
+      <title>Responsive bakery website - Bedimcode</title>
+   </head>
+   <body>
+      <!--==================== HEADER ====================-->
+      <header class="header" id="header">
+            <nav class="nav container">
+               <a href="#" class="nav__logo">Bolos</a>
+
+               <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                       <a href="/#home" class="nav__link">Home</a>
+                    </li>
+                    <li class="nav__item">
+                       <a href="/#categorias" class="nav__link">Categorias</a>
+                    </li>
+                    <li class="nav__item">
+                       <a href="/#itens" class="nav__link">Itens</a>
+                    </li>
+                    <li class="nav__item">
+                       <a href="/#sobre__nos" class="nav__link">Sobre Nós</a>
+                    </li>
+                    <li class="nav__item">
+                       <a href="#carrinho" class="nav__link"> <i class="ri-shopping-cart-line"></i></a>
+                    </li>
+                    <li class="nav__item">
+                       <a href="" class="nav__link"> <i class="ri-logout-box-line"></i></a>
+                    </li>
+                 </ul>
+                  <div class="nav__close" id="nav-close">
+                     <i class="ri-close-line"></i>
+                  </div>
+
+                  <img src="{{ url_for('static', filename='imagens/bread-4.png') }}" alt="" class="nav__img-1">
+                  <img src="{{ url_for('static', filename='imagens/bread-1.png') }}a" alt="" class="nav__img-2">
+               </div>
+
+               <div class="nav__toggle" id="nav-toggle">
+                <i class="ri-shopping-cart-line active-link"></i>
+                  <i class="ri-menu-fill"></i>
+               </div>
+
+
+            </nav>
+      </header>
+
+      <!--==================== MAIN ====================-->
+      <main class="main">
+         <!--==================== HOME ====================-->
+        <section class="card section" id="carrinho">
+            <div class="card__container container grid">
+               {% if itens == [] %}
+                    <center>
+                     <br>
+                     <br>
+                        <h2 class="favorite__title">Seu carrinho esta vazio</h2>
+                    </center>
+               {% else %}
+                <h2 class="card__title">Seus itens</h2>
+
+                <div class="itens">
+                    
+                    {% for item in itens %}
+                    <article class="favorite__card">
+                        <img src="{{ item.foto }}" alt="" class="favorite__img__card">
+                        <div class="favorite__data">
+                           <h2 class="favorite__title">{{ item.sabor }}</h2>
+                           <span class="favorite__subtitle">{{ item.categoria }}</span>
+                           <h3 class="favorite__price">$<span>{{ item.preco }}</span></h3>
+                        </div>
+                        <br>
+                        <i class="ri-delete-bin-line trash" data-id="{{ item.id }}"></i>
+                        <div class="quant__card">
+                            <button class="subtract__line__card" data-id="{{ item.id }}">
+                                <i class="ri-subtract-line"></i>
+                            </button>
+                            <span class="quant__item__card">{{ item.quantidade }}</span>
+                            <button class="add__line__card"  data-id="{{ item.id }}">
+                                
+                                <i class="ri-add-line"></i>
+                            </button>
+                        </div>
+                     </article>
+                     <br>
+                     <br>
+                     <br>
+                   {% endfor %}
+                     <br>
+                     <br>
+                     <br>
+                     <h2 class="card__title">Total a pagar: <span class="favorite__price font__size" id="total-pagar">$6.00</span></h2>
+                     <div class="buttons__up">
+                        <button id="enviar" class="button">Enviar pedido</button>
+                        <button id="voltar" class="button__back button">Continuar comprando</button>
+                     </div>
+                    
+                </div>
+                {% endif %}
+
+
+                
+            </div>
+        </section>
+        
+
+
+      <!--=============== MAIN JS ===============-->
+      <script src="{{ url_for('static', filename='js/principal.js')}}"></script>
+      <script src="{{ url_for('static', filename='js/carrinho.js')}}"></script>
+      
+   </body>
+</html>

@@ -1,0 +1,22 @@
+from projeto.extension.extensoes import db
+
+
+class Pedido(db.Model):
+    id = db.Column(db.Integer, primary_key=True,  autoincrement = True)
+    nome = db.Column(db.Integer, nullable=False)
+    telefone = db.Column(db.String(100), nullable=False)
+    total_pagar = db.Column(db.Integer, nullable = False)
+    
+    
+   
+   
+
+class PedidoItem(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id_pedido = db.Column(db.Integer, nullable=False)
+    nome_produto = db.Column(db.String(100), nullable=False)
+    categoria = db.Column(db.String(100), nullable=False)
+    preco_produto = db.Column(db.Float, nullable=False)
+    quantidade = db.Column(db.Integer, nullable=False)
+    nome_usuario = db.Column(db.String(100), nullable=False)
+    
