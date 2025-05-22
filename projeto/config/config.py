@@ -6,8 +6,7 @@ import cloudinary
 BASE_DIR = os.getcwd()
 
 class Config:
-    SQLALCHEMY_DATABASE_URI = 'postgresql://${{PGUSER}}:${{POSTGRES_PASSWORD}}@${{RAILWAY_PRIVATE_DOMAIN}}:5432/${{PGDATABASE}}'
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_DATABASE_URI =  os.environ.get('DATABASE_URL')
     UPLOAD_FOLDER = 'static/img'
     SECRET_KEY = 'curso_flask'
     PERMANENT_SESSION_LIFETIME = datetime.timedelta(minutes=900000)
