@@ -23,6 +23,7 @@ with app.app_context():
 
     #db.drop_all() #apaga todos os dados
     db.create_all()  
+    Pedido.__table__.drop(db.engine)
     
     
 
