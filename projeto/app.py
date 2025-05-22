@@ -1,11 +1,11 @@
 from flask import Flask, request, redirect, flash, render_template, session, jsonify
-from extension.extensoes import db
-from controller.appController import PessoasController
-from config.config import Config
-from controller.produtoController import ProdutoController
-from controller.carrinhoController import CarrinhoController
-from controller.pedidoControler import PedidoController
-from model.pedido import Pedido, PedidoItem
+from projeto.extension.extensoes import db
+from projeto.controller.appController import PessoasController
+from projeto.config.config import Config
+from projeto.controller.produtoController import ProdutoController
+from projeto.controller.carrinhoController import CarrinhoController
+from projeto.controller.pedidoControler import PedidoController
+from projeto.model.pedido import Pedido, PedidoItem
 
 
 app = Flask(__name__)
