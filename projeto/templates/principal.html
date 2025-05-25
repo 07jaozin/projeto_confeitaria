@@ -15,7 +15,7 @@
       <!--=============== CSS ===============-->
       <link rel="stylesheet" href="{{ url_for('static', filename='css/principal.css')}}">
 
-      <title>Responsive bakery website - Bedimcode</title>
+      <title>Demonstração</title>
    </head>
    <body>
       <!--==================== HEADER ====================-->
@@ -48,11 +48,11 @@
                   </div>
 
                   <img src="{{ url_for('static', filename='imagens/bread-4.png') }}" alt="" class="nav__img-1">
-                  <img src="{{ url_for('static', filename='imagens/bread-1.png') }}a" alt="" class="nav__img-2">
+                  <img src="{{ url_for('static', filename='imagens/bread-1.png') }}" alt="" class="nav__img-2">
                </div>
 
                <div class="nav__toggle" id="nav-toggle">
-                  <a href="carrinho.html" class="ri-shopping-cart-line"></a>
+                  <a href="/carrinho" class="ri-shopping-cart-line"></a>
                   <i class="ri-menu-fill"></i>
                </div>
 
@@ -70,9 +70,9 @@
             <div class="home__container container grid">
                <div class="home__data">
                   <h1 class="home__title">
-                     Select The Best <br> Quality Breads
+                     Melhores doces <br> Da região
                   </h1>
-                  <a href="#" class="button">Select Breads</a>
+                  <a href="#" class="button">Selecione</a>
 
                   
                </div>
@@ -129,11 +129,11 @@
                   
                </div>
 
-               <a href="#" class="new__button button">See new</a>
+              
             </div>
          </section>
          
-         <!--==================== FAVORITES ====================-->
+         <!--==================== ITENS ====================-->
          <section class="favorite section" id="itens">
             <div class="heading">
                <h2 class="section__title">Cones</h2>
@@ -280,8 +280,8 @@
                </div>
             </div>
 
-            <img src="assets/img/bread-4.png" alt="" class="footer__img-1">
-            <img src="assets/img/bread-3.png" alt="" class="footer__img-2">
+            <img src="{{ url_for('static', filename='imagens/bread-4.png')}}" alt="" class="footer__img-1">
+            <img src="{{ url_for('static', filename='imagens/bread-3.png')}}" alt="" class="footer__img-2">
          </div>
 
          
