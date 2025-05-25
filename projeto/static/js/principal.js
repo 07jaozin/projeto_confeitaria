@@ -1,3 +1,5 @@
+//================ REMOVE ITEM ====================
+
 document.addEventListener("DOMContentLoaded", () => {
     const remove_botao = document.querySelectorAll('.trash');
     console.log(remove_botao)
@@ -5,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
     remove_botao.forEach(botao => {
         
         botao.addEventListener("click", () => {
-            console.log('clicou');  // Deve aparecer no console
             let id = parseInt(botao.getAttribute('data-id'));
             fetch('/exclui_carrinho', {
                 method: 'POST',
@@ -21,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-/*=============== SHOW MENU ===============*/
+//=============== SHOW MENU ===============
 
 
 const navMenu = document.getElementById('nav-menu'),
@@ -42,39 +43,32 @@ if(navClose){
     })
 }
 
-/*=============== REMOVE MENU MOBILE ===============*/
+//=============== REMOVE MENU MOBILE ===============
 const navLink = document.querySelectorAll('.nav__link')
 
 const linkAction = () =>{
     const navMenu = document.getElementById('nav-menu')
-    // When we click on each nav__link, we remove the show-menu class
     navMenu.classList.remove('show-menu')
 }
 navLink.forEach(n => n.addEventListener('click', linkAction))
 
-/*=============== CHANGE BACKGROUND HEADER ===============*/
+//=============== CHANGE BACKGROUND HEADER ===============
 const blurHeader = () =>{
     const header = document.getElementById('header')
-    // Add a class if the bottom offset is greater than 50 of the viewport
     this.scrollY >= 50 ? header.classList.add('blur-header') 
                        : header.classList.remove('blur-header')
 }
 window.addEventListener('scroll', blurHeader)
-
-/*=============== ADD ===============*/
 
    
 
 
 
 
-/*=============== ADD BLUR HEADER ===============*/
 
 
-/*=============== SHOW SCROLL UP ===============*/ 
 
-
-/*=============== SCROLL SECTIONS ACTIVE LINK ===============*/
+//=============== animação link ===============
 
 const sections = document.querySelectorAll('section[id]')
     
@@ -213,8 +207,8 @@ subtract__line__index.forEach((button, index) => {
         if(value > 0){
         quant__item__index[index].innerText = value - 1;
         total = total - 1;
-        let valor = parseInt(total_pagar.innerText);
-        let preco = parseInt(favorite__price[index].innerText);
+        let valor = parseFloat(total_pagar.innerText);
+        let preco = parseFloat(favorite__price[index].innerText);
         total_pagar.innerText = valor - preco;
        
 
