@@ -209,7 +209,7 @@ subtract__line__index.forEach((button, index) => {
         total = total - 1;
         let valor = parseFloat(total_pagar.innerText);
         let preco = parseFloat(favorite__price[index].innerText);
-        total_pagar.innerText = (preco - valor).toFixed(2);
+        total_pagar.innerText = (valor - preco).toFixed(2);
        
 
         
