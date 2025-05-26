@@ -1,10 +1,11 @@
 const container = document.querySelector('.container');
 const registerBtn = document.querySelector('.register-btn');
-const loginBtn = document.querySelector('.login-btn');
 const tel = document.querySelectorAll('.tel');
 const inputs = document.querySelectorAll('.input');
 
-
+registerBtn.addEventListener("click", () => {
+    window.location.href='/carrinho'
+})
 
 let total_input = 0;  
 let todos_botoes = document.querySelectorAll('.tel');
