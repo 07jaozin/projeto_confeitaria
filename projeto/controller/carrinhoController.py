@@ -27,7 +27,7 @@ class CarrinhoController:
                     'id': item['id'],
                     'nome': produto.sabor,
                     'categoria': produto.categoria,
-                    'preco': produto.preco,
+                    'preco': float(produto.preco),
                     'peso': produto.peso,
                     'foto': produto.foto,
                     'quantidade': item['quantidade']
@@ -55,13 +55,13 @@ class CarrinhoController:
         self.__total = 0
         itens = self.__carrinho
         for item in itens:
-            self.__total += item['preco'] * item['quantidade']
+            self.__total += float(item['preco']) * int(item['quantidade'])
         return self.__total
     
     def finalizar_pedido(self, nome, telefone):
         itens = self.__carrinho
         total = self.__total
-        novo_pedido = Pedido(nome = nome, telefone = telefone, total_pagar = total)
+        novo_pedido = Pedido(nome = nome, telefone = telefone, total_pagar = float(total))
         db.session.add(novo_pedido)
         db.session.commit()
 

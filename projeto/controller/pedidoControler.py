@@ -9,25 +9,7 @@ carrinhoControler = CarrinhoController()
 
 class PedidoController:
 
-    @staticmethod
-    def finalizar_pedido(nome, telefone):
-        item = carrinhoControler.lista_carrinho
-        print(item)
-        
-
-        #total = carrinho.total_pagar
-        #novo_pedido = Pedido(nome = nome, telefone = telefone, total_pagar = total)
-        #db.session.add(novo_pedido)
-        #db.session.commit()
-#
-        #pedido = carrinho.lista_carrinho
-        #print(pedido)
-        #for item in pedido:
-        #    novo_item = PedidoItem(id_pedido = novo_pedido.id, nome_produto = item['nome'], categoria = item['categoria'], preco_produto = item['preco'], quantidade = item['quantidade'], nome_usuario = nome)
-        #    db.session.add(novo_item)
-        #    db.session.commit()
-#
-        #return True
+   
     @staticmethod
     def listar_pedidosItem():
         pedidos = PedidoItem.query.all()
