@@ -45,10 +45,8 @@ def login():
        telefone = telefone_original.replace(" ","")
 
        if carrinhoControler.finalizar_pedido(nome_ajustado, telefone):
-           return redirect('/')
-       else:
-           flash("dados incorretos")
-           return redirect('/login')
+           return render_template("enviado.html")
+       
     else:
         total = carrinhoControler.total()
         return render_template("login.html", total = total)
