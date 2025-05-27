@@ -74,7 +74,12 @@
 
       <!--=============== MAIN JS ===============-->
       <script src="{{ url_for('static', filename='js/principal.js')}}"></script>
-      <script src="{{ url_for('static', filename='js/carrinho.js')}}"></script>
+      <script>
+         document.getElementById('voltar').addEventListener("click", () =>{
+         window.location.href = '/';
+        })
+
+      </script>
       
    </body>
 </html>
