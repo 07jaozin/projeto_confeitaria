@@ -682,6 +682,9 @@ img {
     margin-inline: 1rem;
 
   }
+  .favorite__img{
+    max-height: 120px;
+  }
   .home__title{
     font-size: 2.5rem;
   }
@@ -732,7 +735,9 @@ img {
     grid-template-columns: repeat(2, 180px);
     justify-content: center;
   }
-
+ .favorite__img{
+    max-height: 120px;
+  }
   .footer__content{
   grid-template-columns: repeat(3, max-content);
   }
@@ -755,7 +760,9 @@ img {
   .favorite__container{
     grid-template-columns: repeat(3, 180px);
   }
-
+ .favorite__img{
+    max-height: 160px;
+  }
   .footer__container{
     grid-template-columns: repeat(2, max-content);
     justify-content: space-between;
