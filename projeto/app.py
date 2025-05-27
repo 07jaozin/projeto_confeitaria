@@ -18,11 +18,14 @@ produtosController = ProdutoController()
 carrinhoControler = CarrinhoController()
 pedidoControler = PedidoController()
 
+
 with app.app_context():  
     
 
     #db.drop_all() #apaga todos os dados
     db.create_all()  
+    Pedido.__table__.drop(db.engine)
+    PedidoItem.__table__.drop(db.engine)
     
     
     
@@ -61,6 +64,8 @@ def cadastrar():
 
     if usuarioController.cadastrar_usuario(nome_ajustado, telefone):
         return redirect('/')
+        
+        
     else:
         return redirect('/login')
 
