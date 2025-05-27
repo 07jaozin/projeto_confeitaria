@@ -13,7 +13,7 @@
       <!--=============== CSS ===============-->
       <link rel="stylesheet" href="{{ url_for('static', filename='css/principal.css')}}">
 
-      <title>carrinho</title>
+      <title>Responsive bakery website - Bedimcode</title>
    </head>
    <body>
       <!--==================== HEADER ====================-->
@@ -61,58 +61,13 @@
       <main class="main">
          <!--==================== HOME ====================-->
         <section class="card section" id="carrinho">
-            <div class="card__container container grid">
-               {% if itens == [] %}
-                    <center>
-                     <br>
-                     <br>
-                        <h2 class="favorite__title">Seu carrinho esta vazio</h2>
-                    </center>
-               {% else %}
-                <h2 class="card__title">Seus itens</h2>
+           <center>
+            <p>Seu pedido foi enviado com sucesso!!</p>
+            <br>
+            <br>
+            <button id="voltar" class="button__back button">Continuar comprando</button>
+           </center>
 
-                <div class="itens">
-                    
-                    {% for item in itens %}
-                    <article class="favorite__card">
-                        <img src="{{ item.foto }}" alt="" class="favorite__img__card">
-                        <div class="favorite__data">
-                           <h2 class="favorite__title">{{ item.sabor }}</h2>
-                           <span class="favorite__subtitle">{{ item.categoria }}</span>
-                           <h3 class="favorite__price">$<span>{{ item.preco }}</span></h3>
-                        </div>
-                        <br>
-                        <i class="ri-delete-bin-line trash" data-id="{{ item.id }}"></i>
-                        <div class="quant__card">
-                            <button class="subtract__line__card" data-id="{{ item.id }}">
-                                <i class="ri-subtract-line"></i>
-                            </button>
-                            <span class="quant__item__card">{{ item.quantidade }}</span>
-                            <button class="add__line__card"  data-id="{{ item.id }}">
-                                
-                                <i class="ri-add-line"></i>
-                            </button>
-                        </div>
-                     </article>
-                     <br>
-                     <br>
-                     <br>
-                   {% endfor %}
-                     <br>
-                     <br>
-                     <br>
-                     <h2 class="card__title">Total a pagar: <span class="favorite__price font__size" id="total-pagar">$6.00</span></h2>
-                     <div class="buttons__up">
-                        <button id="enviar" class="button">Enviar pedido</button>
-                        <button id="voltar" class="button__back button">Continuar comprando</button>
-                     </div>
-                    
-                </div>
-                {% endif %}
-
-
-                
-            </div>
         </section>
         
 
