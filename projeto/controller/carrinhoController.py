@@ -55,7 +55,8 @@ class CarrinhoController:
         self.__total = 0
         itens = self.__carrinho
         for item in itens:
-            self.__total += float(item['preco']) * int(item['quantidade'])
+            numero = round(float(item['preco']) * int(item['quantidade']), 2)
+            self.__total += numero
         return self.__total
     
     def finalizar_pedido(self, nome, telefone):
