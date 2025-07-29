@@ -1,5 +1,5 @@
 from projeto.model.pessoas import Pessoas
-from projeto.app import db
+from projeto.extension.extensoes import db
 from flask import session, flash
 
 class PessoasController:

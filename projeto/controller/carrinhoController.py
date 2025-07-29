@@ -2,7 +2,7 @@ from projeto.model.carrinho import Carrinho
 from projeto.controller.produtoController import ProdutoController
 from projeto.model.produto import Produto
 from projeto.model.pedido import Pedido, PedidoItem
-from projeto.app import db
+from projeto.extension.extensoes import db
 from flask import current_app, session
 import os
 
@@ -69,7 +69,7 @@ class CarrinhoController:
         
         
         for item in itens:
-            novo_item = PedidoItem(id_pedido = novo_pedido.id, nome_produto = item['nome'], categoria = item['categoria'], preco_produto = float(item['preco']) * int(item['quantidade']), quantidade = item['quantidade'], nome_usuario = nome)
+            novo_item = PedidoItem(id_pedido = novo_pedido.id, nome_produto = item['nome'], categoria = item['categoria'], preco_produto = float(item['preco']), quantidade = item['quantidade'], nome_usuario = nome)
             db.session.add(novo_item)
             db.session.commit()
         self.__carrinho = []

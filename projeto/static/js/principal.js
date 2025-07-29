@@ -167,65 +167,56 @@ const quant__item__index = document.querySelectorAll('.quant__item');
 const favorite__price = document.querySelectorAll('.favorite__price span');
 const total_pagar = document.querySelector('.total_pagar');
 
-
 let total = 0;
+
 add__line__index.forEach((button, index) => {
     button.addEventListener("click", () => {
         add_id_ovo(button, index);
+
         let value = parseInt(quant__item__index[index].innerText);
         quant__item__index[index].innerText = value + 1;
-        console.log('index:', index)
-        total = total + 1;
+        total += 1;
 
-        let valor = parseFloat(total_pagar.innerText);
-        console.log(valor)
-        let preco = parseFloat(favorite__price[index].innerText);
-        total_pagar.innerText = (preco + valor).toFixed(2);
-        console.log(preco)
+        let valor = parseFloat(total_pagar.innerText.replace(",", "."));
+        let preco = parseFloat(favorite__price[index].innerText.replace(",", "."));
+        let novoTotal = (preco + valor).toFixed(2).replace(".", ",");
+        total_pagar.innerText = novoTotal;
+
+        button.style.color = 'hsl(28, 88%, 62%)';
         
-
-
-
-        button.style.color = ' hsl(28, 88%, 62%)';
-        console.log(total)
         const add = document.querySelector('.add__container');
-        if(total>0){
-            add.classList.add('visible')
+        if (total > 0) {
+            add.classList.add('visible');
         }
-    })
-
-})
+    });
+});
 
 subtract__line__index.forEach((button, index) => {
-    console.log("click")
-    
     button.addEventListener("click", () => {
         let value = parseInt(quant__item__index[index].innerText);
         subtract_id_ovo(button, index);
-       
-        
-        if(value > 0){
-        quant__item__index[index].innerText = value - 1;
-        total = total - 1;
-        let valor = parseFloat(total_pagar.innerText);
-        let preco = parseFloat(favorite__price[index].innerText);
-        total_pagar.innerText = (valor - preco).toFixed(2);
-       
 
-        
-        }
-        else{
+        if (value > 0) {
+            quant__item__index[index].innerText = value - 1;
+            total -= 1;
+
+            let valor = parseFloat(total_pagar.innerText.replace(",", "."));
+            let preco = parseFloat(favorite__price[index].innerText.replace(",", "."));
+            let novoTotal = (valor - preco).toFixed(2).replace(".", ",");
+            total_pagar.innerText = novoTotal;
+        } else {
             button.style.color = 'gray';
         }
+
         const add = document.querySelector('.add__container');
-        if(total>0){
+        if (total > 0) {
             add.classList.add('visible');
+        } else {
+            add.classList.remove('visible');
         }
-        else{
-            add.classList.remove('visible')
-        }
-    })
-})
+    });
+});
+
 
 let carrinho = []
 function add_id_ovo(element, index){

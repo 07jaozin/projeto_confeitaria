@@ -79,7 +79,7 @@
                         <div class="favorite__data">
                            <h2 class="favorite__title">{{ item.sabor }}</h2>
                            <span class="favorite__subtitle">{{ item.categoria }}</span>
-                           <h3 class="favorite__price">$<span>{{ item.preco }}</span></h3>
+                           <h3 class="favorite__price">$<span class="num">{{ item.preco }}</span></h3>
                         </div>
                         <br>
                         <i class="ri-delete-bin-line trash" data-id="{{ item.id }}"></i>
@@ -101,7 +101,7 @@
                      <br>
                      <br>
                      <br>
-                     <h2 class="card__title">Total a pagar: <span class="favorite__price font__size" id="total-pagar">$6.00</span></h2>
+                     <h2 class="card__title">Total a pagar: <span class="favorite__price font__size num" id="total-pagar">$6.00</span></h2>
                      <div class="buttons__up">
                         <button id="enviar" class="button">Enviar pedido</button>
                         <button id="voltar" class="button__back button">Continuar comprando</button>
@@ -120,6 +120,7 @@
       <!--=============== MAIN JS ===============-->
       <script src="{{ url_for('static', filename='js/principal.js')}}"></script>
       <script src="{{ url_for('static', filename='js/carrinho.js')}}"></script>
+      <script src="{{ url_for('static', filename='js/numero.js')}}"></script>
       
    </body>
 </html>

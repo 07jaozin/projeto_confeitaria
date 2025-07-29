@@ -6,13 +6,15 @@ function calcularTotal() {
     let total = 0;
 
     precos.forEach((precoElem, index) => {
-        const preco = parseFloat(precoElem.innerText);
+        const preco = parseFloat(precoElem.innerText.replace(",", "."));
         const quantidade = parseInt(quantidades[index].innerText);
         total += preco * quantidade;
     });
-
-    totalCampo.innerText = `$${total.toFixed(2)}`;
+    
+    // Formata o total com vírgula no lugar do ponto
+    totalCampo.innerText = `R$ ${total.toFixed(2).replace(".", ",")}`;
     }
+    
 
     // Calcula total ao carregar a página
         document.addEventListener('DOMContentLoaded', calcularTotal);

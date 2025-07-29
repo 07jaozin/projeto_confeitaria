@@ -146,13 +146,13 @@
            <div class="ola swiper">
             <div class=" swiper-wrapper">
                 {% for produtos in produto %}
-                {% if produtos.categoria == 'cone' %}
+                {% if produtos.categoria == 'Cone' %}
                     <article class="favorite__card swiper-slide">
                        <img src="{{ produtos.foto }}" alt="" class="favorite__img">
                        <div class="favorite__data">
                           <h2 class="favorite__title">{{ produtos.sabor }}</h2>
                           <span class="favorite__subtitle">{{ produtos.categoria }}</span>
-                          <h3 class="favorite__price">R$<span>{{ produtos.preco }}</span></h3>
+                          <h3 class="favorite__price">R$<span class="num">{{ produtos.preco }}</span></h3>
                        </div>
                    
                        <div class="quant__card">
@@ -185,13 +185,13 @@
            <div class="ola2 swiper">
             <div class=" swiper-wrapper">
                 {% for produtos in produto %}
-                {% if produtos.categoria == 'bolos' %}
+                {% if produtos.categoria == 'Bolo' %}
                     <article class="favorite__card swiper-slide">
                        <img src="{{ produtos.foto }}" alt="" class="favorite__img">
                        <div class="favorite__data">
                           <h2 class="favorite__title">{{ produtos.sabor }}</h2>
                           <span class="favorite__subtitle">{{ produtos.categoria }}</span>
-                          <h3 class="favorite__price">R$ <span>{{ produtos.preco }}</span></h3>
+                          <h3 class="favorite__price">R$ <span class="num">{{ produtos.preco }}</span></h3>
                        </div>
                    
                        <div class="quant__card">
@@ -217,7 +217,7 @@
 
           <!--==================== ADD ====================-->
             <div class="add__container ">
-               <h2 class="add__title">Valor: R$<span class="total_pagar">0</span></h2>
+               <h2 class="add__title">Valor: R$<span class="total_pagar num" >0</span></h2>
                
                <button class="add__button button">Adicionar</button>
             </div>
@@ -339,5 +339,6 @@
 
       <!--=============== MAIN JS ===============-->
       <script src="{{ url_for('static', filename='js/principal.js')}}"></script>
+      <script src="{{ url_for('static', filename='js/numero.js')}}"></script>
    </body>
 </html>

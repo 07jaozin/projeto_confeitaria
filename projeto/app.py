@@ -22,8 +22,10 @@ pedidoControler = PedidoController()
 with app.app_context():  
     
 
-    #db.drop_all() #apaga todos os dados
+    db.drop_all()
     db.create_all()  
+    
+    
     
     
     
@@ -80,9 +82,10 @@ def gerenciamento():
     if request.method == 'POST':
         sabor = request.form.get('sabor')
         categoria = request.form.get('categoria')
-        preco = request.form.get('preco')
+        preco_virgula = request.form.get('preco')
         peso = request.form.get('peso')
         foto = request.files['foto']
+        preco = preco_virgula.replace(",", ".")
         if produtosController.cadastrar_produto(sabor, categoria, preco, peso, foto):
 
             return redirect('/')
@@ -90,6 +93,23 @@ def gerenciamento():
             return "erro ao cadastrar o produto", 404
     else:
         return render_template("gerenciamento.html", produto = produtosController.listar_todos(), clientes = usuarioController.listar_todos(), pedido = pedidoControler.listar_pedidos(), pedidoItem = pedidoControler.listar_pedidosItem())
+
+@app.route('/produtos', methods = ['GET', 'POST'])
+def produtos():
+    if request.method == 'POST':
+        sabor = request.form.get('sabor')
+        categoria = request.form.get('categoria')
+        preco = request.form.get('preco')
+        peso = request.form.get('peso')
+        foto = request.files['foto']
+        if produtosController.cadastrar_produto(sabor, categoria, preco, peso, foto):
+
+            return redirect('/produtos')
+        else:
+            return "erro ao cadastrar o produto", 404
+        
+    else: 
+         return render_template("produtos.html", produtos = produtosController.listar_todos())
 
 @app.route('/excluir_produto/<int:id>')
 def excluir_produto(id):
@@ -105,9 +125,10 @@ def editar_produto(id):
     if request.method == 'POST':
         sabor = request.form.get('sabor-editar')
         categoria = request.form.get('categoria-editar')
-        preco = request.form.get('preco-editar')
+        preco_virgula = request.form.get('preco-editar')
         peso = request.form.get('peso-editar')
         foto = request.files['foto-editar']
+        preco = float(preco_virgula.replace(",", "."))
         if produtosController.editar_produto(id, sabor, categoria, preco, peso, foto):
             return redirect('/gerenciamento')
         else:
@@ -157,6 +178,25 @@ def logout():
     session.pop('id', default=None)
     session.pop('adm', default=None)
     return redirect('/login')
+
+@app.route('/pedidos_hoje')
+def pedidos_hoje():
+    if session.get('adm'):
+        pedidos = pedidoControler.listar_pedidos_hoje()
+        pedidosItem = pedidoControler.listar_pedidosItem()
+
+        return render_template("pedidosHoje.html", pedidos = pedidos, pedidosItem = pedidosItem)
+    else:
+        return redirect('/')
+@app.route('/pedidos_all')
+def pedidos_all():
+    if session.get('adm'):
+        pedidos = pedidoControler.listar_pedidos()
+        pedidosItem = pedidoControler.listar_pedidosItem()
+
+        return render_template("pedidosAll.html", pedidos = pedidos, pedidosItem = pedidosItem)
+    else:
+        return redirect('/')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=8080)

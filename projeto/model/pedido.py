@@ -1,10 +1,12 @@
 from projeto.extension.extensoes import db
+from datetime import date
 
 
 class Pedido(db.Model):
     id = db.Column(db.Integer, primary_key=True,  autoincrement = True)
     nome = db.Column(db.String(100), nullable=False)
     telefone = db.Column(db.String(100), nullable=False)
+    data = db.Column(db.Date, default=date.today)
     total_pagar = db.Column(db.Float, nullable = False)
     
     

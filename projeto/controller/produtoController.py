@@ -1,5 +1,5 @@
 from projeto.model.produto import Produto
-from projeto.app import db
+from projeto.extension.extensoes import db
 from flask import current_app, session
 import os
 import cloudinary.uploader
@@ -13,6 +13,7 @@ class ProdutoController:
     def autenticacao(nome, senha):
         if nome.lower() == 'desen' and senha.lower() == 'desen':
             session['logado'] = True
+            session['adm'] = True
             return True
         else:
             return False

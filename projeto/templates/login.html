@@ -35,12 +35,13 @@
         <div class="toggle-box">
             <div class="toggle-panel toggle-left">
                 <h1>Finalizar</h1>
-                <p>Total a pagar: R$<span>{{ total | round(2) }}</span></p>
+                <p>Total a pagar: R$<span class="num">{{ total | round(2) }}</span></p>
                 <button class="btn register-btn">Voltar</button>
             </div>
         </div>
 
     </div>
     <script src="{{ url_for('static', filename='js/login.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/numero.js')}}"></script>
 </body>
 </html>
