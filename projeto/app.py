@@ -111,7 +111,7 @@ def produtos():
     else: 
          return render_template("produtos.html", produtos = produtosController.listar_todos())
 
-@app.route('/excluir_produto/<int:id>')
+@app.route('/excluir_produto/<int:id>', methods = ['POST'])
 def excluir_produto(id):
     if 'logado' not in session:
       return redirect('/')
