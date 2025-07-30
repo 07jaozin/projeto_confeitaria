@@ -13,8 +13,8 @@ class Config:
     SECRET_KEY = secrets.token_hex(32)
     PERMANENT_SESSION_LIFETIME = datetime.timedelta(minutes=900000)
     cloudinary.config(
-    cloud_name = 'dcdfpnnyp',
-    api_key='531989171832749',
-    api_secret='-kHcTqhbMJ5VTpToGQxxDTNkE0A'
+    cloud_name = 'dsqxpduuv',
+    api_key='456834939959468',
+    api_secret='FEwY5iPu4RS_sG0h_vlNYPVIfDE'
 )
 
