@@ -290,7 +290,7 @@ img {
 
 }
 .home__image{
-  width: 600px;
+  max-width: 100%;
   justify-self: center;
 }
 
