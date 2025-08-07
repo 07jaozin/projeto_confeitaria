@@ -61,7 +61,7 @@ def cadastrar():
 
 @app.route('/carrinho')
 def carrinho():
-    itens = carrinhoControler.lista_carrinho
+    itens = carrinhoControler.lista_carrinho()
     
     return render_template("carrinho.html", itens = itens)
    
