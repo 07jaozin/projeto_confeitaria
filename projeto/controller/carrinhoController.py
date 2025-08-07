@@ -1,28 +1,31 @@
-from projeto.model.carrinho import Carrinho
-from projeto.controller.produtoController import ProdutoController
 from projeto.model.produto import Produto
 from projeto.model.pedido import Pedido, PedidoItem
 from projeto.extension.extensoes import db
-from flask import current_app, session
-import os
+from flask import session
 
 class CarrinhoController:
-    def __init__(self):
-        self.__carrinho = []
-        self.__total = 0
 
+    @staticmethod
+    def init_session():
+        if 'carrinho' not in session:
+            session['carrinho'] = []
+        if 'total' not in session:
+            session['total'] = 0
 
-    def adicionar_carrinho(self, carrinho):
-        encontrado = False
+    @staticmethod
+    def adicionar_carrinho(carrinho):
+        CarrinhoController.init_session()
         for item in carrinho:
-            for iten in self.__carrinho:
-                
-                if iten['id'] == item['id']:
+            encontrado = False
+            for iten in session['carrinho']:
+                if int(iten['id']) == int(item['id']):
                     iten['quantidade'] += item['quantidade']
+                    session.modified = True
                     encontrado = True
+                    break
 
-            if not encontrado:  
-                produto = Produto.query.filter_by(id_produto = item['id']).first()
+            if not encontrado:
+                produto = Produto.query.filter_by(id_produto=item['id']).first()
                 novo_item = {
                     'id': item['id'],
                     'nome': produto.sabor,
@@ -32,89 +35,71 @@ class CarrinhoController:
                     'foto': produto.foto,
                     'quantidade': item['quantidade']
                 }
-                self.__carrinho.append(novo_item)
-        print('carrinho ',carrinho)
+                session['carrinho'].append(novo_item)
+                session.modified = True
         return True
-    
-    @property
-    def lista_carrinho(self):
-        return self.__carrinho
-    @property
-    def total_pagar(self):
-        return self.__total
-    
-    def atualiza(self, carrinho):
-        itens = self.__carrinho
-        for item in itens:
+
+    @staticmethod
+    def lista_carrinho():
+        CarrinhoController.init_session()
+        return session['carrinho']
+
+    @staticmethod
+    def total_pagar():
+        CarrinhoController.init_session()
+        return session['total']
+
+    @staticmethod
+    def atualiza(carrinho):
+        CarrinhoController.init_session()
+        for item in session['carrinho']:
             for item_carrinho in carrinho:
-                if item['id'] == item_carrinho['id']:
+                if int(item['id']) == int(item_carrinho['id']):
                     item['quantidade'] = item_carrinho['quantidade']
+                    session.modified = True
         return True
-    
-    def total(self):
-        self.__total = 0
-        itens = self.__carrinho
-        for item in itens:
-            numero = round(float(item['preco']) * int(item['quantidade']), 2)
-            self.__total += numero
-        return self.__total
-    
-    def finalizar_pedido(self, nome, telefone):
-        itens = self.__carrinho
-        total = self.__total
-        novo_pedido = Pedido(nome = nome, telefone = telefone, total_pagar = float(total))
+
+    @staticmethod
+    def total():
+        CarrinhoController.init_session()
+        total = 0
+        for item in session['carrinho']:
+            valor = round(float(item['preco']) * int(item['quantidade']), 2)
+            total += valor
+        session['total'] = total
+        session.modified = True
+        return total
+
+    @staticmethod
+    def finalizar_pedido(nome, telefone):
+        CarrinhoController.init_session()
+        itens = session['carrinho']
+        total = session['total']
+
+        novo_pedido = Pedido(nome=nome, telefone=telefone, total_pagar=float(total))
         db.session.add(novo_pedido)
         db.session.commit()
 
-        
-        
         for item in itens:
-            novo_item = PedidoItem(id_pedido = novo_pedido.id, nome_produto = item['nome'], categoria = item['categoria'], preco_produto = float(item['preco']), quantidade = item['quantidade'], nome_usuario = nome)
+            novo_item = PedidoItem(
+                id_pedido=novo_pedido.id,
+                nome_produto=item['nome'],
+                categoria=item['categoria'],
+                preco_produto=float(item['preco']),
+                quantidade=item['quantidade'],
+                nome_usuario=nome
+            )
             db.session.add(novo_item)
-            db.session.commit()
-        self.__carrinho = []
-        return True
-    
-    def exclui_pedido(self, id):
-        itens  = self.__carrinho
-        for item in itens:
-            if item['id'] == id:
-                self.__carrinho.remove(item)
-        return True
-    
-    #@staticmethod
-    #def adicionar_carrinho(carrinho):
-    #    for item in carrinho:
-    #        novo_card = Carrinho(id_usuario = session['id'], id_produto = item['id'], quantidade = int(item['quantidade']))
-    #        db.session.add(novo_card)
-    #        db.session.commit()
-    #    return True
-    #
-    #@staticmethod
-    #def listar_carrinho():
-    #    id = session['id']
-    #    itens = Carrinho.query.filter_by(id_usuario = id).all()
-    #    
-    #    return itens
-    #
-    #@staticmethod
-    #def excluir_carrinho(id):
-    #    itens = Carrinho.query.filter_by(id_usuario = session['id'], id_produto = id).first()
-    #    db.session.delete(itens)
-    #    db.session.commit()
-    #    return True
-    #@staticmethod
-    #def atualiza_quant(id, quant):
-    #    itens = Carrinho.query.all()
-    #    for item in itens:
-    #        if id == item.id:
-    #            item.quantidade = quant
-    #            db.session.commit()
-#
-    #    return True
-#
 
-      
-            
-        
+        db.session.commit()
+        session['carrinho'] = []
+        session['total'] = 0
+        session.modified = True
+        return True
 
+    @staticmethod
+    def exclui_pedido(id):
+        CarrinhoController.init_session()
+        session['carrinho'] = [item for item in session['carrinho'] if int(item['id']) != int(id)]
+        session.modified = True
+        return True
