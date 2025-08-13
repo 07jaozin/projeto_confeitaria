@@ -155,7 +155,7 @@
                        <img src="{{ produtos.foto }}" alt="" class="favorite__img">
                        <div class="favorite__data">
                           <h2 class="favorite__title">{{ produtos.sabor }}</h2>
-                          <span class="favorite__subtitle">{{ produtos.categoria }}</span>
+                          <span class="favorite__subtitle">{{ produtos.peso }}</span>
                           <h3 class="favorite__price">R$<span class="num">{{ produtos.preco }}</span></h3>
                        </div>
                    
@@ -194,7 +194,7 @@
                        <img src="{{ produtos.foto }}" alt="" class="favorite__img">
                        <div class="favorite__data">
                           <h2 class="favorite__title">{{ produtos.sabor }}</h2>
-                          <span class="favorite__subtitle">{{ produtos.categoria }}</span>
+                          <span class="favorite__subtitle"><span>{{ (produtos.peso / 1000) | round(2) }}</span>Kg</span>
                           <h3 class="favorite__price">R$ <span class="num">{{ produtos.preco }}</span></h3>
                        </div>
                    
