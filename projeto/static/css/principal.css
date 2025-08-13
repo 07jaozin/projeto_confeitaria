@@ -424,7 +424,7 @@ img {
 .favorite__img{
   width: 120px;
   position: absolute;
-  top: -2rem;
+  top: -3rem;
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -736,7 +736,8 @@ img {
     justify-content: center;
   }
  .favorite__img{
-    max-height: 140px;
+    max-height: 160px;
+    top: -4rem;
   }
   .footer__content{
   grid-template-columns: repeat(3, max-content);
@@ -762,6 +763,7 @@ img {
   }
  .favorite__img{
     max-height: 180px;
+    top: -3.75rem;
   }
   .footer__container{
     grid-template-columns: repeat(2, max-content);
