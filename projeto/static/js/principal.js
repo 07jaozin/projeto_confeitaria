@@ -2,7 +2,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     const remove_botao = document.querySelectorAll('.trash');
-    console.log(remove_botao)
+    
 
     remove_botao.forEach(botao => {
         
@@ -125,7 +125,6 @@ add__line.forEach((button, index) => {
 })
 
 subtract__line.forEach((button, index) => {
-    console.log("click")
     button.addEventListener("click", () => {
         let value = parseInt(quant__item[index].innerText);
         total = total + value;
@@ -221,10 +220,7 @@ subtract__line__index.forEach((button, index) => {
 let carrinho = []
 function add_id_ovo(element, index){
     let id = parseInt(element.getAttribute('data-id'));
-    console.log('id:', id)
-    console.log('index:', parseInt(index))
     
-    console.log('quantidade:', parseInt(quant__item__index[parseInt(index)].innerText) + 1)
     let quant = parseInt(quant__item__index[parseInt(index)].innerText) + 1;
     let encontrado = false
 
@@ -242,12 +238,9 @@ function add_id_ovo(element, index){
         carrinho.push(novo_item)
     }
    
-    console.log(carrinho)
 }
 function subtract_id_ovo(element, index){
     let id = parseInt(element.getAttribute('data-id'));
-    console.log('id:', id)
-    console.log('index:', parseInt(index))
     if(carrinho.length > 0){
     let quant = parseInt(quant__item__index[parseInt(index)].innerText) - 1;
     let encontrado = false;
@@ -270,7 +263,7 @@ function subtract_id_ovo(element, index){
     
     }
    
-    console.log(carrinho)
+   
 }
 
 const add__button = document.querySelector('.add__button');
